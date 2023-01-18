@@ -1,0 +1,43 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block content %}
+    <div style="margin: 150px; width: 50%; border: 3px solid black; padding: 10px; ">
+        <form class="contactform" method="post" action="{% url 'registerr' %}">
+            {% csrf_token %}
+            {{form.non_field_errors}}                                              
+            <div class="aa-single-field">
+              {{form.first_name.errors}}
+              <label for="name">First Name <span class="required">*</span></label>
+              {{form.first_name}}
+            </div>
+            <div class="aa-single-field">
+              {{form.last_name.errors}}
+              <label for="name">Last Name <span class="required">*</span></label>
+              {{form.last_name}}
+            </div>
+            <div class="aa-single-field">
+              {{form.username.errors}}
+              <label for="name">Username <span class="required">*</span></label>
+              {{form.username}}
+            </div>
+            <div class="aa-single-field">
+              {{form.email.errors}}
+              <label for="email">Email <span class="required">*</span></label>
+              {{form.email}}
+            </div>
+            <div class="aa-single-field">
+              {{form.password1.errors}}
+              <label for="password">Password <span class="required">*</span></label>
+              {{form.password1}}
+            </div>
+            <div class="aa-single-field">
+              {{form.password2.errors}}
+              <label for="confirm-password">Confirm Password <span class="required">*</span></label>
+              {{form.password2}}
+            </div>
+            <div class="aa-single-submit">
+              <input type="submit" value="Create Account" name="submit">                    
+            </div>
+          </form>
+    </div>
+{% endblock %}

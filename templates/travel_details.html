@@ -1,0 +1,207 @@
+{% extends 'partials/base.html' %}
+
+{%load static%}
+{% block content %}
+
+
+  <!-- ***** Preloader Start ***** -->
+
+  <!-- ***** Header Area End ***** -->
+  <div class="amazing-deals">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading text-center">
+            <h2>Best Weekly Offers In Each City</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+          </div>
+        </div>
+       
+        
+       
+          <div class="item" style="height: 1200px;">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="image">
+                  <img src="{{turn.img.url}}" alt="">
+                </div>
+              </div>
+              <div class="col-lg-6 align-self-center">
+                <div class="content">
+                  <span class="info">*Offer Until 24th March</span>
+                  <h4>{{turn.name}}</h4>
+                  <div class="row">
+                    <div class="col-6">
+                      <i class="fa fa-calendar"></i>
+                      <span class="list">{{turn.daysall}}</span>
+                    </div><div class="col-6">
+                        <i class="fa fa-flag"></i>
+                        <span class="list">{{turn.country}}</span>
+                      </div>
+                    <div class="col-6">
+                      <i class="fa fa-map"></i>
+                      <span class="list">{{turn.city}}</span>
+                    </div>
+                    <div class="col-6">
+                        <i class="fa fa-usd"></i>
+                        <span class="list">{{turn.price}}</span>
+                      </div>
+                  </div>
+                  
+
+                </div>
+                <div class="post-content">
+                  <div class="post-date">
+                    {% if user.is_authenticated %}
+
+                     {% comment %} {%if turn.persons in request.user%} {% endcomment %}
+                     {% comment %} {% for  x  in persons  %} {% endcomment %}
+                        {% if persons %}
+                      
+                          <form method="POST" action="{% url 'travel_register' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{user.id}}">
+                            <input type="hidden" name="turn_id" value="{{turn.id}}">
+                            <button type="submit" class="btn btn-outline-danger rounded-0">  
+                              <span>Turu legv et</span>
+                          </form>
+                        {% else %}
+                          {% if turn.max_person == count_person %}
+                          
+                          
+                            
+                            <button type="submit" class="btn btn-info rounded-0">  
+                              <span>Tur Doludur</span>
+                          {% else %}
+                          <form method="POST" action="{% url 'travel_register' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{user.id}}">
+                            <input type="hidden" name="turn_id" value="{{turn.id}}">
+                            <button type="submit" class="btn btn-outline-success rounded-0">  
+                              <span>Tura qosul</span>
+                          </form>
+
+                          {% endif %}
+                          
+                        {% endif %} 
+                      {% comment %} {% endfor %} {% endcomment %}
+
+                    {% endif %}   
+                   
+                     
+                    
+                  
+                  </div>
+                </div> 
+              
+            </div>
+            <p>{{turn.description}}</p>
+            <div class="row">         
+                       <div class="col-8">
+                       
+
+                  <i class="fa fa-calendar"></i>
+                  <span class="list">Gun:</span>
+                  <span class="list">{{turn.daysall}}</span>
+                  
+                </div><div class="col-12">
+                    <i class="fa fa-flag"></i>
+                    <span class="list">Gun:</span>
+                    <span class="list">{{turn.country}}</span>
+                  </div>
+                <div class="col-12">
+                  <i class="fa fa-map"></i>
+                  <span class="list">Seher:</span>
+                  <span class="list">{{turn.city}}</span>
+                </div>
+                <div class="col-12">
+                    <i class="fa fa-usd"></i>
+                    <span class="list">Qiymet</span>
+                    <span class="list">{{turn.price}}</span>
+                  </div>
+              </div>
+              
+              <div class="col-16">
+                    
+
+                <i class="fa fa-calendar"></i>
+                <span class="list">Tarix:</span>
+                <span class="list">{{turn.start_date}}</span>
+                
+              </div><div class="col-12">
+                  <i class="fa fa-flag"></i>
+                  <span class="list">Bitis Tarix:</span>
+                  <span class="list">{{turn.finish_date}}</span>
+                </div>
+              <div class="col-12">
+                <i class="fa fa-map"></i>
+                <span class="list">Umumi istirakci sayi::</span>
+                <span class="list">{{turn.max_person}}</span>
+              </div>
+              <div class="col-12">
+                <i class="fa fa-map"></i>
+                <span class="list">Uzv olan istirakci sayi::</span>
+                <span class="list">{{count_person}}</span>
+              </div>
+              <div class="col-12">
+                  <i class="fa fa-usd"></i>
+                  <span class="list">Qiymet</span>
+                  <span class="list">{{turn.price}}</span>
+                </div>
+            </div>
+            </div>
+          </div>
+        
+    </div>
+
+  </div>
+  {% comment %} <div class="modal fade" id="enrollModal" tabindex="-1" role="dialog" aria-labelledby="enrollModalLabel"
+	  aria-hidden="true">
+	 <div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title" id="enrollModalLabel">Kursu qeyd edin</h2>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p>Aşağıdakı kursa yazılacaqsınız:</p>
+				
+				<h1>{{course.name}}</h1>
+			</div>
+			<div class="modal-footer">
+				<form action="{% url 'enroll_the_course' %}" method="POST">
+          {% csrf_token %}
+					<input type="hidden" name="user_id" value="{{user.id}}">
+					<input type="hidden" name="turn_id" value="{{turn.id}}">
+				
+				
+					<input type="submit" value="Hə" class="btn btn-success">
+				</form>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">
+					Yox
+				</button>
+			</div>
+		</div>
+	</div> {% endcomment %}
+</div>
+	</div>
+
+</div>
+{% comment %} <div class="modal fade" id="releaseModal" tabindex="-1" role="dialog" aria-labelledby="releaseModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="modal-title" id="releaseModalLabel">Kursu qeyd edin</h2>
+				<button type="button" class="close" data-dismiss="modal">
+					<span>&times;</span>
+				</button>
+			</div>
+			
+		</div>
+	</div>
+</div> {% endcomment %}
+{% endblock %}
+  
