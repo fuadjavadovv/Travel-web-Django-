@@ -5,7 +5,7 @@ from django_admin_listfilter_dropdown.filters import (
 )
 # Register your models here.
 class TurnAdmin(admin.ModelAdmin):
-   list_display = ['name','country','price','created_user','city']
+   list_display = ['name','country','price','created_user','city','id']
    search_fields = ['name']
    list_filter = (('price',DropdownFilter),)
    list_select_related = ['created_user']

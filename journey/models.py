@@ -25,7 +25,7 @@ class Persons(models.Model):
 class Turn(models.Model):
     created_user = models.ForeignKey(User,on_delete = models.CASCADE, related_name='turns')
     name = models.CharField(max_length = 250)
-    country = models.CharField(max_length=250)
+    # country = models.CharField(max_length=250)
     city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True, blank=True)
     description = models.TextField()

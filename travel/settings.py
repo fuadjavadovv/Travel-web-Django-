@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'journey',
     'user',
+    'api',
     'django_admin_listfilter_dropdown',
+    'rest_framework',
 
 ]
 
